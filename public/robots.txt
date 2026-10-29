@@ -1,0 +1,16 @@
+# ============================================================
+# robots.txt — فضائلِ اعمال
+# ============================================================
+
+# Allow all search engines to crawl the whole site
+User-agent: *
+Allow: /
+
+# Don't crawl the PDF directly (it's displayed via canvas)
+Disallow: /fazail.pdf
+
+# Sitemap location
+Sitemap: https://waseem59p.github.io/fazail-e-amaal/sitemap.xml
+
+# Crawl-delay (optional — be gentle with the server)
+Crawl-delay: 1
