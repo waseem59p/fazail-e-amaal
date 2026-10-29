@@ -376,11 +376,14 @@
   .toast { background: #1b4035; color: #f4dfb4; border-color: rgba(201,169,110,.55); }
   .loader { background: rgba(12,24,20,.97); }
 
-  /* Mobile: 8 columns to fit APK button */
+  /* ============================================================
+     MOBILE TOPBAR — 9 columns so APK button text fits
+     ============================================================ */
   @media (max-width: 700px) {
     body { min-height: 100dvh; }
     .topbar {
-      display: grid; grid-template-columns: repeat(8, minmax(0, 1fr));
+      display: grid;
+      grid-template-columns: repeat(8, minmax(0, 1fr));
       gap: 6px; padding: 8px; padding-top: calc(8px + var(--safe-top));
       flex-wrap: initial; overflow: visible;
     }
@@ -388,12 +391,27 @@
     .brand-text { display: inline; }
     .topbar .spacer { display: none; }
     .topbar .zoom-badge { grid-column: 5 / span 4; justify-self: end; align-self: center; }
+
     .topbar > .btn {
       position: relative; width: 100%; min-width: 0; height: 42px; padding: 0;
       border-radius: 12px; justify-content: center;
     }
-    .topbar > .btn span:not(#favCount) { display: none; }
+
+    /* Hide text on all buttons EXCEPT #favCount and #apkBtnText */
+    .topbar > .btn span:not(#favCount):not(#apkBtnText) { display: none; }
     .topbar > .btn svg { width: 19px; height: 19px; }
+
+    /* APK button gets its own row, full width, with text visible */
+    .topbar > .btn.apk-btn {
+      grid-column: 1 / -1;
+      height: 44px;
+      gap: 8px;
+      font-size: 13.5px;
+      padding: 0 14px;
+    }
+    .topbar > .btn.apk-btn svg { width: 20px; height: 20px; }
+    .topbar > .btn.apk-btn #apkBtnText { display: inline; }
+
     .topbar #favCount {
       position: absolute; top: -4px; left: -3px; z-index: 1;
       display: inline-flex; align-items: center; justify-content: center;
@@ -418,6 +436,7 @@
     .topbar .brand svg { width: 22px; height: 22px; }
     .bottombar { grid-template-columns: 38px 38px minmax(78px, 1fr) 38px 38px; gap: 5px; padding-inline: 6px; }
     .bottombar .btn { width: 38px; min-width: 38px; }
+    .topbar > .btn.apk-btn { font-size: 13px; }
   }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
@@ -459,9 +478,9 @@
   </button>
 
   <!-- APK download button -->
-  <button class="btn apk-btn" onclick="downloadAPK()" id="apkBtn" aria-label="آف لائن ایپ APK ڈاؤن لوڈ کریں">
+  <button class="btn apk-btn" onclick="downloadAPK()" id="apkBtn" aria-label="آف لائن ایپ ڈاؤن لوڈ کریں" title="آف لائن ایپ ڈاؤن لوڈ">
     <svg viewBox="0 0 24 24"><path d="M12 2v13"/><polyline points="7 10 12 15 17 10"/><path d="M5 21h14"/></svg>
-    <span id="apkBtnText">APK</span>
+    <span id="apkBtnText">آف لائن ایپ ڈاؤن لوڈ</span>
   </button>
 </div>
 
@@ -568,9 +587,10 @@
   /* CONFIG */
   const PDF_URL = 'fazail.pdf';
 
-  // APK download link — GitHub Releases
-  const APK_URL = 'https://github.com/waseem59p/fazail-e-amaal/releases/download/v3.1/_3.1.apk';
+  // APK download link — GitHub Releases (encoded Unicode filename)
+  const APK_URL = 'https://github.com/waseem59p/fazail-e-amaal/releases/download/%EA%9C%B0%E1%B4%80%E1%B4%A2%E1%B4%80%C9%AA%CA%9F-%E1%B4%87-%E1%B4%80%E1%B4%8D%E1%B4%80%E1%B4%80%CA%9F(%E1%B4%9C%CA%80%E1%B4%85%E1%B4%9C)_3.1/_3.1.apk';
   const APK_FILENAME = 'Fazail-e-Amaal.apk';
+  const APK_LABEL_DEFAULT = 'آف لائن ایپ ڈاؤن لوڈ';
 
   const STORAGE_KEY = 'fazail-e-amaal-favorites-v9';
   const LAST_PAGE_KEY = 'fazail-e-amaal-last-page-v9';
@@ -731,13 +751,13 @@
   function setApkBtnState(loading, label) {
     if (!apkBtn) return;
     apkBtn.disabled = !!loading;
-    if (apkBtnText) apkBtnText.textContent = label || 'APK';
+    if (apkBtnText) apkBtnText.textContent = label || APK_LABEL_DEFAULT;
   }
 
   async function downloadAPK() {
     if (isDownloadingApk) return;
 
-    // 1) Native bridge (agar future me APK ke andar chalega)
+    // Native bridge (agar future me APK ke andar chalega)
     if (typeof Android !== 'undefined' && typeof Android.downloadApk === 'function') {
       try {
         Android.downloadApk(APK_URL);
@@ -756,7 +776,6 @@
 
       const total = parseInt(res.headers.get('content-length') || '0', 10);
 
-      // Agar streaming body available hai to progress ke sath padho
       if (res.body && res.body.getReader) {
         const reader = res.body.getReader();
         const chunks = [];
@@ -785,7 +804,6 @@
         const blob = new Blob(chunks, { type: 'application/vnd.android.package-archive' });
         triggerBlobDownload(blob, APK_FILENAME);
       } else {
-        // Fallback: seedha blob
         const blob = await res.blob();
         triggerBlobDownload(blob, APK_FILENAME);
       }
@@ -793,7 +811,6 @@
       showToast('✅ APK محفوظ ہو گیا — Install کریں', 3500);
     } catch (err) {
       console.warn('APK fetch failed, using direct link:', err);
-      // Fallback: browser ko seedha link do
       const a = document.createElement('a');
       a.href = APK_URL;
       a.download = APK_FILENAME;
@@ -808,7 +825,7 @@
       showToast('APK ڈاؤن لوڈ شروع ہو گیا', 3000);
     } finally {
       isDownloadingApk = false;
-      setApkBtnState(false, 'APK');
+      setApkBtnState(false, APK_LABEL_DEFAULT);
     }
   }
 
