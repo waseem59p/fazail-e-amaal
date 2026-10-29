@@ -69,6 +69,7 @@
     border-color: #46c98a; color: #fff; font-weight: 700;
   }
   .btn.apk-btn:hover { background: linear-gradient(180deg, #46c98a, #2e9e6b); color: #08120e; }
+  .btn.apk-btn:disabled { opacity: .6; cursor: not-allowed; }
 
   .topbar {
     flex: 0 0 auto;
@@ -458,9 +459,9 @@
   </button>
 
   <!-- APK download button -->
-  <button class="btn apk-btn" onclick="downloadAPK()" aria-label="آف لائن ایپ APK ڈاؤن لوڈ کریں">
+  <button class="btn apk-btn" onclick="downloadAPK()" id="apkBtn" aria-label="آف لائن ایپ APK ڈاؤن لوڈ کریں">
     <svg viewBox="0 0 24 24"><path d="M12 2v13"/><polyline points="7 10 12 15 17 10"/><path d="M5 21h14"/></svg>
-    <span>APK</span>
+    <span id="apkBtnText">APK</span>
   </button>
 </div>
 
@@ -564,13 +565,12 @@
 <!-- PDF.js from CDN -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
-  
-/* CONFIG */
-const PDF_URL = 'fazail.pdf';
+  /* CONFIG */
+  const PDF_URL = 'fazail.pdf';
 
-// APK download link — GitHub Releases
-const APK_URL = 'https://github.com/waseem59p/fazail-e-amaal/releases/download/v3.1/_3.1.apk';
-
+  // APK download link — GitHub Releases
+  const APK_URL = 'https://github.com/waseem59p/fazail-e-amaal/releases/download/v3.1/_3.1.apk';
+  const APK_FILENAME = 'Fazail-e-Amaal.apk';
 
   const STORAGE_KEY = 'fazail-e-amaal-favorites-v9';
   const LAST_PAGE_KEY = 'fazail-e-amaal-last-page-v9';
@@ -599,6 +599,7 @@ const APK_URL = 'https://github.com/waseem59p/fazail-e-amaal/releases/download/v
   let touchStartX = 0, touchStartY = 0;
   let isSwiping = false;
   let isSaving = false;
+  let isDownloadingApk = false;
 
   /* DOUBLE BACK TO EXIT */
   let backPressCount = 0;
@@ -647,9 +648,9 @@ const APK_URL = 'https://github.com/waseem59p/fazail-e-amaal/releases/download/v
       try { history.pushState({ ov: backStack.length }, ''); } catch(err) {}
       return;
     }
-    if (isSaving) {
+    if (isSaving || isDownloadingApk) {
       backPressCount = 0;
-      showToast('صفحہ محفوظ ہو رہا ہے؛ مکمل ہونے تک ایپ بند نہیں ہوگی۔');
+      showToast('کام جاری ہے؛ مکمل ہونے تک انتظار کریں');
       try { history.pushState({ saving: true }, ''); } catch(err) {}
       return;
     }
@@ -708,6 +709,8 @@ const APK_URL = 'https://github.com/waseem59p/fazail-e-amaal/releases/download/v
   const zoomBadge = document.getElementById('zoomBadge');
   const edgeHintLeft = document.getElementById('edgeHintLeft');
   const edgeHintRight = document.getElementById('edgeHintRight');
+  const apkBtn = document.getElementById('apkBtn');
+  const apkBtnText = document.getElementById('apkBtnText');
 
   /* TOAST */
   let toastTimer;
@@ -722,18 +725,105 @@ const APK_URL = 'https://github.com/waseem59p/fazail-e-amaal/releases/download/v
     return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   }
 
-  /* APK DOWNLOAD — simple website download */
-  function downloadAPK() {
-    showToast('APK ڈاؤن لوڈ ہو رہا ہے…');
+  /* =========================================================
+     APK DOWNLOAD — fetch + blob (proper filename) + fallback
+     ========================================================= */
+  function setApkBtnState(loading, label) {
+    if (!apkBtn) return;
+    apkBtn.disabled = !!loading;
+    if (apkBtnText) apkBtnText.textContent = label || 'APK';
+  }
+
+  async function downloadAPK() {
+    if (isDownloadingApk) return;
+
+    // 1) Native bridge (agar future me APK ke andar chalega)
+    if (typeof Android !== 'undefined' && typeof Android.downloadApk === 'function') {
+      try {
+        Android.downloadApk(APK_URL);
+        showToast('APK ڈاؤن لوڈ شروع ہو گیا');
+        return;
+      } catch (e) { /* fallback to web */ }
+    }
+
+    isDownloadingApk = true;
+    setApkBtnState(true, '…');
+    showToast('APK ڈاؤن لوڈ ہو رہا ہے…', 60000);
+
+    try {
+      const res = await fetch(APK_URL, { cache: 'no-store', redirect: 'follow' });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+
+      const total = parseInt(res.headers.get('content-length') || '0', 10);
+
+      // Agar streaming body available hai to progress ke sath padho
+      if (res.body && res.body.getReader) {
+        const reader = res.body.getReader();
+        const chunks = [];
+        let received = 0;
+        let lastPct = -1;
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          chunks.push(value);
+          received += value.length;
+
+          if (total > 0) {
+            const pct = Math.min(99, Math.floor((received / total) * 100));
+            if (pct !== lastPct) {
+              lastPct = pct;
+              showToast('APK ڈاؤن لوڈ… ' + pct + '%', 60000);
+              if (apkBtnText) apkBtnText.textContent = pct + '%';
+            }
+          } else {
+            const mb = (received / 1048576).toFixed(1);
+            showToast('APK ڈاؤن لوڈ… ' + mb + ' MB', 60000);
+          }
+        }
+
+        const blob = new Blob(chunks, { type: 'application/vnd.android.package-archive' });
+        triggerBlobDownload(blob, APK_FILENAME);
+      } else {
+        // Fallback: seedha blob
+        const blob = await res.blob();
+        triggerBlobDownload(blob, APK_FILENAME);
+      }
+
+      showToast('✅ APK محفوظ ہو گیا — Install کریں', 3500);
+    } catch (err) {
+      console.warn('APK fetch failed, using direct link:', err);
+      // Fallback: browser ko seedha link do
+      const a = document.createElement('a');
+      a.href = APK_URL;
+      a.download = APK_FILENAME;
+      a.rel = 'noopener';
+      a.target = '_blank';
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => {
+        if (a.parentNode) a.parentNode.removeChild(a);
+      }, 800);
+      showToast('APK ڈاؤن لوڈ شروع ہو گیا', 3000);
+    } finally {
+      isDownloadingApk = false;
+      setApkBtnState(false, 'APK');
+    }
+  }
+
+  function triggerBlobDownload(blob, filename) {
+    const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
-    a.href = APK_URL;
-    a.download = 'Fazail-e-Amaal.apk';
+    a.href = url;
+    a.download = filename;
     a.style.display = 'none';
     document.body.appendChild(a);
     a.click();
     setTimeout(() => {
       if (a.parentNode) a.parentNode.removeChild(a);
-    }, 800);
+      URL.revokeObjectURL(url);
+    }, 1000);
   }
 
   /* FAVORITES */
@@ -1125,7 +1215,7 @@ const APK_URL = 'https://github.com/waseem59p/fazail-e-amaal/releases/download/v
   /* KEYBOARD */
   document.addEventListener('keydown', (e) => {
     if (e.target.tagName === 'INPUT') return;
-    if (isSaving) {
+    if (isSaving || isDownloadingApk) {
       if (e.key === 'Escape') e.preventDefault();
       return;
     }
