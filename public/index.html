@@ -64,33 +64,48 @@
   }
   .btn.primary:hover { background: linear-gradient(180deg, #f4d876, var(--gold-light)); }
   .btn.icon-only { padding: 0; width: 42px; height: 42px; min-width: 42px; }
-  .btn.apk-btn {
-    background: linear-gradient(180deg, #2e9e6b, #217a52);
-    border-color: #46c98a; color: #fff; font-weight: 700;
-  }
-  .btn.apk-btn:hover { background: linear-gradient(180deg, #46c98a, #2e9e6b); color: #08120e; }
-  .btn.apk-btn:disabled { opacity: .6; cursor: not-allowed; }
 
   .topbar {
     flex: 0 0 auto;
     background: linear-gradient(180deg, var(--navy-light), var(--navy));
     border-bottom: 1px solid rgba(201,162,39,.4);
-    display: flex; align-items: center; gap: 8px;
-    padding: 8px 12px; padding-top: calc(8px + var(--safe-top));
-    z-index: 50; flex-wrap: wrap;
+    padding: 6px 10px;
+    padding-top: calc(6px + var(--safe-top));
+    z-index: 50;
     box-shadow: 0 3px 20px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.06);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
   }
-  .topbar .brand { display: flex; align-items: center; gap: 10px; font-size: 15px;
+  .topbar-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+  }
+  .topbar-row-1 {
+    justify-content: space-between;
+  }
+  .topbar-row-2 {
+    justify-content: center;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .topbar-row-2::-webkit-scrollbar { display: none; }
+
+  .topbar .brand { display: flex; align-items: center; gap: 8px; font-size: 14px;
     font-weight: 700; color: var(--gold-light); white-space: nowrap; flex-shrink: 0; }
-  .topbar .brand svg { width: 28px; height: 28px; stroke: var(--gold-light); fill: none;
+  .topbar .brand svg { width: 24px; height: 24px; stroke: var(--gold-light); fill: none;
     stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
     filter: drop-shadow(0 2px 4px rgba(201,162,39,.4)); }
-  .topbar .spacer { flex: 1; min-width: 8px; }
-  .topbar .zoom-badge { font-size: 11px;
+  .topbar .zoom-badge { font-size: 10px;
     background: linear-gradient(180deg, rgba(201,162,39,.3), rgba(201,162,39,.15));
     border: 1px solid rgba(201,162,39,.5); color: var(--gold-light);
-    padding: 5px 12px; border-radius: 20px;
-    font-family: 'SF Mono', Menlo, monospace; font-weight: 700; white-space: nowrap; }
+    padding: 4px 9px; border-radius: 20px;
+    font-family: 'SF Mono', Menlo, monospace; font-weight: 700; white-space: nowrap;
+    flex-shrink: 0; }
 
   .viewer {
     flex: 1 1 auto; position: relative; overflow: hidden;
@@ -318,106 +333,20 @@
     stroke-width: 2.5; stroke-linecap: round; }
 
   @media (max-width: 700px) {
-    .topbar { padding: 8px; gap: 6px; padding-top: calc(8px + var(--safe-top)); }
-    .topbar .brand { font-size: 13px; }
-    .topbar .brand svg { width: 24px; height: 24px; }
-    .topbar .btn { height: 38px; padding: 0 10px; font-size: 12px; gap: 6px; }
-    .topbar .btn svg { width: 16px; height: 16px; }
-    .topbar .btn.icon-only { width: 38px; min-width: 38px; }
-    .topbar .zoom-badge { font-size: 10px; padding: 4px 9px; }
-    .bottombar { padding: 8px; gap: 6px; padding-bottom: calc(8px + var(--safe-bottom)); }
-    .bottombar .btn { height: 44px; min-width: 44px; padding: 0 12px; font-size: 13px; }
-    .bottombar .btn svg { width: 18px; height: 18px; }
-    .bottombar .btn.icon-only { width: 44px; min-width: 44px; }
-    .page-input { height: 44px; padding: 0 10px; gap: 6px; }
-    .page-input input { width: 52px; height: 32px; font-size: 14px; }
-    .page-indicator { font-size: 12px; padding: 0 6px; }
     .brand-text { display: none; }
     .edge-hint { width: 40px; height: 40px; }
     .edge-hint svg { width: 18px; height: 18px; }
     .drawer { width: 100%; }
     .sheet .sheet-buttons button { font-size: 13.5px; min-height: 56px; padding: 12px 16px; }
-  }
-  @media (max-width: 400px) {
-    .topbar .btn span:not(.keep) { display: none; }
-    .topbar .btn { padding: 0; width: 38px; min-width: 38px; justify-content: center; }
-    .sheet .sheet-buttons button { font-size: 13px; min-height: 54px; }
-  }
-
-  :root { color-scheme: dark; }
-  html, body { font-family: "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", "Amiri", serif; }
-  button, input { font: inherit; }
-  button:focus-visible, input:focus-visible {
-    outline: 3px solid rgba(239,214,161,.78); outline-offset: 2px;
-  }
-  .topbar, .bottombar {
-    background: linear-gradient(180deg, rgba(24,72,62,.98), rgba(18,58,50,.98));
-    border-color: rgba(201,169,110,.45);
-  }
-  .btn { border-color: rgba(201,169,110,.58); border-radius: 12px; }
-  .btn.primary, .page-input input { color: #10251f; }
-  .viewer { background:
-    radial-gradient(ellipse at 50% 0%, rgba(201,169,110,.075), transparent 52%),
-    radial-gradient(ellipse at 50% 100%, rgba(24,72,62,.32), transparent 58%), var(--bg); }
-  .drawer, .sheet {
-    background: linear-gradient(165deg, #1a2923 0%, #10231e 100%);
-    border-color: rgba(201,169,110,.72);
-  }
-  .drawer-header {
-    background: linear-gradient(180deg, #1c4c40, #153b33);
-    border-bottom-color: rgba(201,169,110,.38);
-  }
-.fav-item {
-    background: linear-gradient(145deg, rgba(35,55,46,.96), rgba(26,43,36,.96));
-    border-color: rgba(201,169,110,.2); border-radius: 16px;
-  }
-.page-input { border-color: rgba(201,169,110,.38); }
-  .page-input input { border-color: rgba(201,169,110,.38); }
-  .toast { background: #1b4035; color: #f4dfb4; border-color: rgba(201,169,110,.55); }
-  .loader { background: rgba(12,24,20,.97); }
-
-  /* ============================================================
-     MOBILE TOPBAR — 9 columns so APK button text fits
-     ============================================================ */
-  @media (max-width: 700px) {
-    body { min-height: 100dvh; }
-    .topbar {
-      display: grid;
-      grid-template-columns: repeat(8, minmax(0, 1fr));
-      gap: 6px; padding: 8px; padding-top: calc(8px + var(--safe-top));
-      flex-wrap: initial; overflow: visible;
-    }
-    .topbar .brand { grid-column: 1 / span 4; min-height: 34px; font-size: 14px; }
-    .brand-text { display: inline; }
-    .topbar .spacer { display: none; }
-    .topbar .zoom-badge { grid-column: 5 / span 4; justify-self: end; align-self: center; }
-
-    .topbar > .btn {
-      position: relative; width: 100%; min-width: 0; height: 42px; padding: 0;
-      border-radius: 12px; justify-content: center;
-    }
-
-    /* Hide text on all buttons EXCEPT #favCount and #apkBtnText */
-    .topbar > .btn span:not(#favCount):not(#apkBtnText) { display: none; }
-    .topbar > .btn svg { width: 19px; height: 19px; }
-
-    /* APK button gets its own row, full width, with text visible */
-    .topbar > .btn.apk-btn {
-      grid-column: 1 / -1;
-      height: 44px;
-      gap: 8px;
-      font-size: 13.5px;
-      padding: 0 14px;
-    }
-    .topbar > .btn.apk-btn svg { width: 20px; height: 20px; }
-    .topbar > .btn.apk-btn #apkBtnText { display: inline; }
-
-    .topbar #favCount {
-      position: absolute; top: -4px; left: -3px; z-index: 1;
-      display: inline-flex; align-items: center; justify-content: center;
-      min-width: 16px; height: 16px; padding: 0 4px; font-size: 9px;
-      border: 1px solid var(--navy); box-shadow: 0 2px 5px rgba(0,0,0,.35);
-    }
+    .bottombar { gap: 6px; padding: 8px; padding-bottom: calc(8px + var(--safe-bottom)); }
+    .bottombar .btn { height: 44px; min-width: 44px; padding: 0 12px; font-size: 13px; }
+    .bottombar .btn svg { width: 18px; height: 18px; }
+    .bottombar .btn.icon-only { width: 44px; min-width: 44px; }
+    .page-input { height: 44px; padding: 0 10px; gap: 6px; }
+    .page-input input { width: 52px; height: 32px; font-size: 14px; }
+    .page-indicator { display: none; }
+    .drawer { top: 0; bottom: 0; height: 100dvh; max-height: 100dvh; }
+.sheet { max-height: min(85dvh, 720px); }
     .bottombar {
       display: grid; grid-template-columns: 40px 40px minmax(90px, 1fr) 40px 40px;
       gap: 6px; padding: 8px; padding-bottom: calc(8px + var(--safe-bottom));
@@ -425,63 +354,105 @@
     .bottombar .btn { width: 40px; min-width: 40px; height: 42px; padding: 0; }
     .page-input { width: 100%; min-width: 0; height: 42px; justify-content: center; padding: 0 6px; gap: 5px; }
     .page-input input { width: 48px; min-width: 0; height: 31px; }
-    .page-indicator { display: none; }
-    .drawer { top: 0; bottom: 0; height: 100dvh; max-height: 100dvh; }
-.sheet { max-height: min(85dvh, 720px); }
   }
   @media (max-width: 360px) {
-    .topbar { gap: 4px; padding-inline: 6px; }
-    .topbar > .btn { height: 40px; }
-    .topbar .brand { font-size: 13px; gap: 7px; }
-    .topbar .brand svg { width: 22px; height: 22px; }
     .bottombar { grid-template-columns: 38px 38px minmax(78px, 1fr) 38px 38px; gap: 5px; padding-inline: 6px; }
     .bottombar .btn { width: 38px; min-width: 38px; }
-    .topbar > .btn.apk-btn { font-size: 13px; }
   }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  }
+
+  /* ============================================================
+     APK / OFFLINE APP DOWNLOAD BUTTON — English text
+     ============================================================ */
+  .btn.apk-top-btn {
+    background: linear-gradient(180deg, #2e9e6b, #217a52) !important;
+    border-color: #46c98a !important;
+    color: #fff !important;
+    font-weight: 700;
+    font-family: Arial, "Helvetica Neue", sans-serif !important;
+    letter-spacing: .3px;
+    gap: 8px;
+    height: 40px;
+    padding: 0 14px;
+    font-size: 13px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(46,158,107,.4), inset 0 1px 0 rgba(255,255,255,.15) !important;
+  }
+  .btn.apk-top-btn:hover {
+    background: linear-gradient(180deg, #46c98a, #2e9e6b) !important;
+    color: #08120e !important;
+    transform: translateY(-1px);
+  }
+  .btn.apk-top-btn:active { transform: scale(.96); }
+  .btn.apk-top-btn:disabled { opacity: .6; cursor: not-allowed; }
+  .btn.apk-top-btn svg { width: 18px; height: 18px; }
+
+  @media (max-width: 700px) {
+    .btn.apk-top-btn {
+      height: 38px;
+      padding: 0 10px;
+      font-size: 11.5px;
+      gap: 6px;
+    }
+    .btn.apk-top-btn svg { width: 16px; height: 16px; }
+  }
+
+  @media (max-width: 360px) {
+    .btn.apk-top-btn {
+      height: 36px;
+      padding: 0 8px;
+      font-size: 10.5px;
+      gap: 5px;
+    }
+    .btn.apk-top-btn svg { width: 15px; height: 15px; }
   }
 </style>
 </head>
 <body>
 
 <div class="topbar">
-  <div class="brand">
-    <svg viewBox="0 0 24 24"><path d="M4 4h12a2 2 0 0 1 2 2v14H6a2 2 0 0 1-2-2V4z"/><path d="M4 4h12a2 2 0 0 1 2 2v14"/><line x1="8" y1="9" x2="14" y2="9"/><line x1="8" y1="13" x2="14" y2="13"/></svg>
-    <span class="brand-text">فضائلِ اعمال</span>
+  <!-- Row 1: Brand + Offline App Download (English) -->
+  <div class="topbar-row topbar-row-1">
+    <div class="brand">
+      <svg viewBox="0 0 24 24"><path d="M4 4h12a2 2 0 0 1 2 2v14H6a2 2 0 0 1-2-2V4z"/><path d="M4 4h12a2 2 0 0 1 2 2v14"/><line x1="8" y1="9" x2="14" y2="9"/><line x1="8" y1="13" x2="14" y2="13"/></svg>
+      <span class="brand-text">فضائلِ اعمال</span>
+    </div>
+
+    <button class="btn apk-top-btn" onclick="downloadAPK()" id="apkBtn" aria-label="Offline App Download" title="Offline App Download">
+      <svg viewBox="0 0 24 24"><path d="M12 2v13"/><polyline points="7 10 12 15 17 10"/><path d="M5 21h14"/></svg>
+      <span id="apkBtnText">Offline App Download</span>
+    </button>
   </div>
-  <div class="spacer"></div>
 
-  <span class="zoom-badge" id="zoomBadge">120%</span>
-  <button class="btn icon-only" onclick="zoomIn()" title="بڑا کریں" aria-label="صفحہ بڑا کریں">
-    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
-  </button>
-  <button class="btn icon-only" onclick="zoomOut()" title="چھوٹا کریں" aria-label="صفحہ چھوٹا کریں">
-    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-  </button>
-  <button class="btn icon-only" onclick="resetZoom()" title="اصل سائز" aria-label="اصل سائز پر واپس جائیں">
-    <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><polyline points="3 4 3 10 9 10"/></svg>
-  </button>
-<button class="btn" onclick="toggleFavorite()" id="favBtn" aria-label="پسندیدہ صفحہ محفوظ کریں">
-    <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-    <span id="favBtnText">پسندیدہ</span>
-  </button>
-
-  <button class="btn" onclick="openDrawer()" aria-label="پسندیدہ صفحات دیکھیں">
-    <svg viewBox="0 0 24 24"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>
-    <span style="background:var(--star);color:#000;border-radius:10px;padding:0 7px;font-size:11px;font-weight:800;min-width:20px;text-align:center;" id="favCount">0</span>
-  </button>
-
-  <button class="btn primary" onclick="openExportSheet()" aria-label="صفحہ محفوظ کریں">
-    <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-    <span>محفوظ</span>
-  </button>
-
-  <!-- APK download button -->
-  <button class="btn apk-btn" onclick="downloadAPK()" id="apkBtn" aria-label="آف لائن ایپ ڈاؤن لوڈ کریں" title="آف لائن ایپ ڈاؤن لوڈ">
-    <svg viewBox="0 0 24 24"><path d="M12 2v13"/><polyline points="7 10 12 15 17 10"/><path d="M5 21h14"/></svg>
-    <span id="apkBtnText">آف لائن ایپ ڈاؤن لوڈ</span>
-  </button>
+  <!-- Row 2: Zoom + toolbar buttons -->
+  <div class="topbar-row topbar-row-2">
+    <span class="zoom-badge" id="zoomBadge">120%</span>
+    <button class="btn icon-only" onclick="zoomIn()" title="بڑا کریں" aria-label="صفحہ بڑا کریں">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+    </button>
+    <button class="btn icon-only" onclick="zoomOut()" title="چھوٹا کریں" aria-label="صفحہ چھوٹا کریں">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+    </button>
+    <button class="btn icon-only" onclick="resetZoom()" title="اصل سائز" aria-label="اصل سائز پر واپس جائیں">
+      <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><polyline points="3 4 3 10 9 10"/></svg>
+    </button>
+    <button class="btn" onclick="toggleFavorite()" id="favBtn" aria-label="پسندیدہ صفحہ محفوظ کریں">
+      <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      <span id="favBtnText">پسندیدہ</span>
+    </button>
+    <button class="btn" onclick="openDrawer()" aria-label="پسندیدہ صفحات دیکھیں">
+      <svg viewBox="0 0 24 24"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>
+      <span style="background:var(--star);color:#000;border-radius:10px;padding:0 7px;font-size:11px;font-weight:800;min-width:20px;text-align:center;" id="favCount">0</span>
+    </button>
+    <button class="btn primary" onclick="openExportSheet()" aria-label="صفحہ محفوظ کریں">
+      <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <span>محفوظ</span>
+    </button>
+  </div>
 </div>
 
 <div class="viewer" id="viewer">
@@ -590,7 +561,7 @@
   // APK download link — GitHub Releases (encoded Unicode filename)
   const APK_URL = 'https://github.com/waseem59p/fazail-e-amaal/releases/download/%EA%9C%B0%E1%B4%80%E1%B4%A2%E1%B4%80%C9%AA%CA%9F-%E1%B4%87-%E1%B4%80%E1%B4%8D%E1%B4%80%E1%B4%80%CA%9F(%E1%B4%9C%CA%80%E1%B4%85%E1%B4%9C)_3.1/_3.1.apk';
   const APK_FILENAME = 'Fazail-e-Amaal.apk';
-  const APK_LABEL_DEFAULT = 'آف لائن ایپ ڈاؤن لوڈ';
+  const APK_LABEL_DEFAULT = 'Offline App Download';
 
   const STORAGE_KEY = 'fazail-e-amaal-favorites-v9';
   const LAST_PAGE_KEY = 'fazail-e-amaal-last-page-v9';
@@ -745,9 +716,7 @@
     return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   }
 
-  /* =========================================================
-     APK DOWNLOAD — fetch + blob (proper filename) + fallback
-     ========================================================= */
+  /* APK DOWNLOAD */
   function setApkBtnState(loading, label) {
     if (!apkBtn) return;
     apkBtn.disabled = !!loading;
@@ -757,13 +726,12 @@
   async function downloadAPK() {
     if (isDownloadingApk) return;
 
-    // Native bridge (agar future me APK ke andar chalega)
     if (typeof Android !== 'undefined' && typeof Android.downloadApk === 'function') {
       try {
         Android.downloadApk(APK_URL);
         showToast('APK ڈاؤن لوڈ شروع ہو گیا');
         return;
-      } catch (e) { /* fallback to web */ }
+      } catch (e) { }
     }
 
     isDownloadingApk = true;
