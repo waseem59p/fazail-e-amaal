@@ -6,27 +6,9 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "headers": [
-      {
-        "source": "/sitemap.xml",
-        "headers": [
-          { "key": "Content-Type", "value": "application/xml; charset=utf-8" },
-          { "key": "Cache-Control", "value": "public, max-age=3600" }
-        ]
-      },
-      {
-        "source": "/robots.txt",
-        "headers": [
-          { "key": "Content-Type", "value": "text/plain; charset=utf-8" }
-        ]
-      }
-    ],
     "rewrites": [
       { "source": "/sitemap.xml", "destination": "/sitemap.xml" },
       { "source": "/robots.txt", "destination": "/robots.txt" },
-      { "source": "/manifest.json", "destination": "/manifest.json" },
-      { "source": "/service-worker.js", "destination": "/service-worker.js" },
-      { "source": "/fazail.pdf", "destination": "/fazail.pdf" },
       { "source": "**", "destination": "/index.html" }
     ]
   }
