@@ -1,8 +1,21 @@
-# Search engines may crawl the website.
+# ============================================================
+# robots.txt — فضائلِ اعمال / Fazail-e-Amaal
+# https://fazaileamal.web.app/
+# ============================================================
+
+# All search engines are welcome to crawl the site
 User-agent: *
 Allow: /
 
-# The PDF is excluded from search indexing by the X-Robots-Tag HTTP header
-# configured in Firebase Hosting (see firebase-pdf-noindex.txt).
+# Block service worker from being indexed (it's code, not content)
+Disallow: /service-worker.js
 
+# Block Firebase config files
+Disallow: /firebase.json
+Disallow: /firebase-pdf-noindex.txt
+
+# The PDF is handled by X-Robots-Tag header in firebase.json
+# (Google can crawl it but won't index it — see firebase.json headers section)
+
+# Sitemap location
 Sitemap: https://fazaileamal.web.app/sitemap.xml
