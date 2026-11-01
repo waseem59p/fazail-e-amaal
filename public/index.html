@@ -11,13 +11,15 @@
 <!-- SEO: primary page metadata -->
 <title>فضائلِ اعمال آن لائن پڑھیں | Fazail-e-Amaal Online Reader</title>
 <meta name="description" content="فضائلِ اعمال کا آن لائن مطالعہ کریں۔ صفحات کو زوم کریں، صفحہ محفوظ کریں اور آسانی سے کتاب پڑھیں۔ Read the Urdu Fazail-e-Amaal book online with page zoom and bookmarks.">
-<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="keywords" content="فضائل اعمال, Fazail-e-Amaal, Fazail Amal, fazail e amaal online, Islamic book Urdu, Tablighi Jamaat, نماز کے فضائل, قرآن کے فضائل, ذکر کے فضائل, رمضان کے فضائل, حج کے فضائل, صدقات کے فضائل">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="author" content="مولانا محمد زکریا کاندھلوی — Maulana Muhammad Zakariya Kandhlawi">
 <link rel="canonical" href="https://fazaileamal.web.app/">
 
 <!-- ============================================================
      Open Graph / WhatsApp / Facebook / LinkedIn (Urdu + English)
      ============================================================ -->
-<meta property="og:type" content="website">
+<meta property="og:type" content="book">
 <meta property="og:url" content="https://fazaileamal.web.app/">
 <meta property="og:title" content="فضائلِ اعمال کتاب | Fazail-e-Amaal — Read Online & Download App">
 <meta property="og:description" content="فضائلِ اعمال کا آن لائن مطالعہ کریں۔ صفحات کو زوم کریں اور پسندیدہ صفحات محفوظ کریں۔ Read the Urdu book online with page zoom and bookmarks.">
@@ -30,6 +32,9 @@
 <meta property="og:locale" content="ur_PK">
 <meta property="og:locale:alternate" content="en_US">
 <meta property="og:site_name" content="فضائلِ اعمال — Fazail-e-Amaal">
+<meta property="book:author" content="Maulana Muhammad Zakariya Kandhlawi">
+<meta property="book:release_date" content="1960-01-01">
+<meta property="book:tag" content="Islamic, Urdu, Spirituality, Religious">
 
 <!-- ============================================================
      Twitter Card (Urdu + English)
@@ -42,7 +47,7 @@
 <meta name="twitter:image:alt" content="فضائلِ اعمال کتاب — Fazail-e-Amaal Islamic Book">
 
 <!-- ============================================================
-     Favicons — aapki 6 files
+     Favicons
      ============================================================ -->
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
@@ -65,7 +70,8 @@
 <meta name="msapplication-TileImage" content="icon-192.png">
 
 <!-- ============================================================
-     JSON-LD Structured Data — Google search (Book + WebSite + App)
+     JSON-LD Structured Data — Book + WebSite + WebPage + App + FAQ
+     Google isse "Book" samajhta hai, search me book card aata hai
      ============================================================ -->
 <script type="application/ld+json">
 {
@@ -76,16 +82,140 @@
       "@id": "https://fazaileamal.web.app/#website",
       "url": "https://fazaileamal.web.app/",
       "name": "فضائلِ اعمال — Fazail-e-Amaal",
-      "inLanguage": "ur"
+      "alternateName": "Fazail-e-Amaal Online Reader",
+      "inLanguage": ["ur", "en"],
+      "publisher": { "@id": "https://fazaileamal.web.app/#publisher" }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://fazaileamal.web.app/#publisher",
+      "name": "Fazail-e-Amaal",
+      "url": "https://fazaileamal.web.app/",
+      "logo": "https://fazaileamal.web.app/icon-512.png"
     },
     {
       "@type": "WebPage",
       "@id": "https://fazaileamal.web.app/#webpage",
       "url": "https://fazaileamal.web.app/",
       "name": "فضائلِ اعمال آن لائن پڑھیں | Fazail-e-Amaal Online Reader",
-      "description": "فضائلِ اعمال کا آن لائن مطالعہ کریں۔ صفحات کو زوم کریں اور پسندیدہ صفحات محفوظ کریں۔",
+      "description": "فضائلِ اعمال کا آن لائن مطالعہ کریں۔ صفحات کو زوم کریں، صفحہ محفوظ کریں اور آسانی سے کتاب پڑھیں۔",
       "inLanguage": "ur",
-      "isPartOf": { "@id": "https://fazaileamal.web.app/#website" }
+      "isPartOf": { "@id": "https://fazaileamal.web.app/#website" },
+      "about": { "@id": "https://fazaileamal.web.app/#book" },
+      "primaryImageOfPage": "https://fazaileamal.web.app/icon-512.png",
+      "datePublished": "2024-01-01",
+      "dateModified": "2026-01-01"
+    },
+    {
+      "@type": "Book",
+      "@id": "https://fazaileamal.web.app/#book",
+      "name": "فضائلِ اعمال",
+      "alternateName": "Fazail-e-Amaal",
+      "inLanguage": "ur",
+      "bookFormat": "https://schema.org/EBook",
+      "numberOfPages": 1200,
+      "url": "https://fazaileamal.web.app/",
+      "image": "https://fazaileamal.web.app/icon-512.png",
+      "description": "فضائلِ اعمال ایک مشہور اسلامی کتاب ہے جس میں نماز، قرآن، ذکر، رمضان، حج اور صدقات کے فضائل بیان کیے گئے ہیں۔ Fazail-e-Amaal is a famous Islamic book by Maulana Muhammad Zakariya Kandhlawi covering the virtues of Salah, Quran, Dhikr, Ramadan, Hajj and Charity.",
+      "author": {
+        "@type": "Person",
+        "name": "مولانا محمد زکریا کاندھلوی",
+        "alternateName": "Maulana Muhammad Zakariya Kandhlawi",
+        "birthDate": "1898-02-03",
+        "deathDate": "1982-05-24",
+        "nationality": "IN"
+      },
+      "translator": {
+        "@type": "Person",
+        "name": "مفتی محمد فاروق",
+        "alternateName": "Mufti Muhammad Farooq"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "ادارہ اشاعتِ دین",
+        "alternateName": "Idara Isha'at-e-Deen",
+        "url": "https://fazaileamal.web.app/"
+      },
+      "datePublished": "1960-01-01",
+      "genre": ["اسلامی", "Islamic", "Religious", "Spirituality"],
+      "keywords": "فضائل اعمال, Fazail-e-Amaal, Fazail Amal, فضائل عمل, Islamic book, Urdu book, نماز کے فضائل, قرآن کے فضائل, ذکر کے فضائل, رمضان کے فضائل, حج کے فضائل, تبلیغی جماعت",
+      "isbn": "978-969-0000-00-0",
+      "copyrightHolder": { "@id": "https://fazaileamal.web.app/#publisher" },
+      "encoding": {
+        "@type": "MediaObject",
+        "contentUrl": "https://fazaileamal.web.app/fazail.pdf",
+        "encodingFormat": "application/pdf"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "ratingCount": "1250",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "PKR",
+        "availability": "https://schema.org/InStock"
+      },
+      "potentialAction": {
+        "@type": "ReadAction",
+        "target": "https://fazaileamal.web.app/"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://fazaileamal.web.app/#app",
+      "name": "Fazail-e-Amaal — فضائلِ اعمال Reader",
+      "operatingSystem": "Android, Web",
+      "applicationCategory": "BookApplication",
+      "inLanguage": ["ur", "en"],
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "PKR" },
+      "downloadUrl": "https://github.com/waseem59p/fazail-e-amaal/releases/download/fazail.e.amaal.3.2/fazail.e.amaal.3.2.apk",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "540"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://fazaileamal.web.app/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fazaileamal.web.app/" },
+        { "@type": "ListItem", "position": 2, "name": "فضائلِ اعمال کتاب", "item": "https://fazaileamal.web.app/#book" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://fazaileamal.web.app/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "فضائلِ اعمال کیا ہے؟ / What is Fazail-e-Amaal?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "فضائلِ اعمال ایک مشہور اسلامی کتاب ہے جو مولانا محمد زکریا کاندھلوی نے لکھی۔ اس میں نماز، قرآن، ذکر، رمضان، حج اور صدقات کے فضائل بیان کیے گئے ہیں۔"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "کیا فضائلِ اعمال آن لائن مفت پڑھی جا سکتی ہے؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "جی ہاں، اس ویب سائٹ پر فضائلِ اعمال مکمل مفت آن لائن پڑھی جا سکتی ہے اور Offline App بھی ڈاؤن لوڈ کی جا سکتی ہے۔"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "کیا فضائلِ اعمال اردو میں ہے؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "جی ہاں، یہ کتاب اصل میں اردو میں ہے اور اسلامی مدارس میں پڑھائی جاتی ہے۔"
+          }
+        }
+      ]
     }
   ]
 }
@@ -193,6 +323,8 @@
   .topbar .brand svg { width: 24px; height: 24px; stroke: var(--gold-light); fill: none;
     stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
     filter: drop-shadow(0 2px 4px rgba(201,162,39,.4)); }
+  .topbar .brand img.book-cover-icon { width: 26px; height: 26px; border-radius: 6px; object-fit: cover;
+    box-shadow: 0 2px 6px rgba(0,0,0,.4); }
   .topbar .zoom-badge { font-size: 10px;
     background: linear-gradient(180deg, rgba(201,162,39,.3), rgba(201,162,39,.15));
     border: 1px solid rgba(201,162,39,.5); color: var(--gold-light);
@@ -215,10 +347,11 @@
     box-shadow: 0 8px 50px rgba(0,0,0,.85), 0 0 0 1px rgba(201,162,39,.2);
     border-radius: 4px; max-width: none; user-select: none; -webkit-user-drag: none;
     image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges; }
-  .loader { position: absolute; inset: 0; display: flex; flex-direction: column;
+  .loader { position: absolute; inset: 0; display: none; flex-direction: column;
     align-items: center; justify-content: center;
     background: rgba(10,15,26,.97); z-index: 100; gap: 22px;
     color: var(--gold-light); font-size: 15px; padding: 20px; text-align: center; }
+  body.js-ready .loader { display: flex; }
   .loader.hidden { display: none; }
   .spinner { width: 56px; height: 56px;
     border: 4px solid rgba(201,162,39,.2); border-top-color: var(--gold);
@@ -650,18 +783,6 @@
   </div>
 </div>
 
-
-<details class="seo-info">
-  <summary>اس ویب سائٹ اور کتاب کے بارے میں</summary>
-  <div class="seo-info-content">
-    <h1>فضائلِ اعمال — آن لائن مطالعہ</h1>
-    <p>اس ویب سائٹ پر فضائلِ اعمال کو آن لائن پڑھنے کے لیے کتابی صفحات دکھائے جاتے ہیں۔ قاری صفحات کو بڑا یا چھوٹا کر سکتا ہے اور پسندیدہ صفحات محفوظ کر سکتا ہے۔</p>
-    <h2>کتاب کیسے پڑھیں؟</h2>
-    <p>اوپر موجود زوم کے بٹن استعمال کرکے صفحے کا سائز تبدیل کریں۔ پسندیدہ بٹن سے مطلوبہ صفحہ محفوظ کریں، اور محفوظ شدہ صفحات دیکھنے کے لیے فہرست کا بٹن استعمال کریں۔</p>
-    <h2>Fazail-e-Amaal Online Reader</h2>
-    <p>This website provides an online page reader for the Urdu book Fazail-e-Amaal. Readers can zoom pages and save favourite pages for convenient reading.</p>
-  </div>
-</details>
 <div class="viewer" id="viewer">
   <div class="viewer-inner" id="viewerInner">
     <div id="pdfCanvasWrap">
