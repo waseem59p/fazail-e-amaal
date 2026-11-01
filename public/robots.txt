@@ -1,6 +1,6 @@
 # ============================================================
 # robots.txt — فضائلِ اعمال
-# https://fazaile-amal.web.app/
+# https://fazaileamal.web.app/
 # ============================================================
 
 # Allow all search engines to crawl the whole site
@@ -11,7 +11,7 @@ Allow: /
 Disallow: /fazail.pdf
 
 # Sitemap location
-Sitemap: https://fazaile-amal.web.app/sitemap.xml
+Sitemap: https://fazaileamal.web.app/sitemap.xml
 
 # Crawl-delay (optional — be gentle with the server)
 Crawl-delay: 1
