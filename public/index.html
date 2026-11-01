@@ -584,24 +584,9 @@
     </button>
   </div>
 </div>
-
-<!-- ============================================================ -->
-<!-- TOAST + BACK HINT -->
-<!-- ============================================================ -->
-<div class="toast" id="toast"></div>
-<div class="back-hint" id="backHint">
-  <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-  <span>واپس دبائیں</span>
-</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
-  /* ============================================================
-     JS-READY class — Googlebot ke liye
-     Startup screen sirf tab dikhe jab JS chale
-     ============================================================ */
-  document.body.classList.add('js-ready');
-
-  const PDF_URL = '/fazail.pdf';
+  const PDF_URL = 'fazail.pdf';
 
   const APK_URL = 'https://github.com/waseem59p/fazail-e-amaal/releases/download/fazail.e.amaal.3.2/fazail.e.amaal.3.2.apk';
   const APK_FILENAME = 'Fazail-e-Amaal.apk';
@@ -931,45 +916,6 @@
     });
   }
 
-  /* ---------- STARTUP / LANGUAGE COVER ---------- */
-  let selectedReaderLanguage = 'ur';
-
-  function selectReaderLanguage(lang) {
-    selectedReaderLanguage = lang === 'en' ? 'en' : 'ur';
-    document.documentElement.lang = selectedReaderLanguage;
-    document.documentElement.dir = selectedReaderLanguage === 'ur' ? 'rtl' : 'ltr';
-    document.querySelectorAll('.startup-lang-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.lang === selectedReaderLanguage);
-      btn.setAttribute('aria-pressed', btn.dataset.lang === selectedReaderLanguage ? 'true' : 'false');
-    });
-    const ur = selectedReaderLanguage === 'ur';
-    const openUr = document.getElementById('startupOpenUr');
-    const openEn = document.getElementById('startupOpenEn');
-    const statusEl = document.getElementById('startupStatus');
-    const statusEnEl = document.getElementById('startupStatusEn');
-    if (openUr) openUr.hidden = !ur;
-    if (openEn) openEn.hidden = ur;
-    if (statusEl) statusEl.textContent = ur ? 'کتاب تیار ہے' : 'Your book is ready';
-    if (statusEnEl) statusEnEl.textContent = ur ? 'Choose a language and open the book.' : 'Choose your language and open the book.';
-    try { localStorage.setItem('fazail-reader-language', selectedReaderLanguage); } catch(e) {}
-  }
-
-  function showStartupCover() {
-    const loading = document.getElementById('startupLoading');
-    const welcome = document.getElementById('startupWelcome');
-    if (loading) loading.hidden = true;
-    if (welcome) welcome.hidden = false;
-    let saved = 'ur';
-    try { saved = localStorage.getItem('fazail-reader-language') || 'ur'; } catch(e) {}
-    selectReaderLanguage(saved);
-  }
-
-  function enterBookReader() {
-    const screen = document.getElementById('startupScreen');
-    if (screen) screen.classList.add('is-hidden');
-    try { localStorage.setItem('fazail-reader-started', '1'); } catch(e) {}
-  }
-
   async function loadPDF() {
     try {
       loaderText.textContent = 'کتاب لوڈ ہو رہی ہے…';
@@ -991,15 +937,12 @@
       updateZoomBadge();
       await renderPage(currentPage);
       loader.classList.add('hidden');
-      showStartupCover();
       showToast('📖 کتاب تیار ہے — زوم ' + Math.round(scale * 100) + '%');
       if (!localStorage.getItem('zoomHintShown')) {
         setTimeout(() => { zoomHint.classList.add('show'); setTimeout(() => zoomHint.classList.remove('show'), 4000); localStorage.setItem('zoomHintShown', '1'); }, 800);
       }
     } catch (err) {
       console.error(err);
-      const startupError = document.getElementById('startupError');
-      if (startupError) { startupError.hidden = false; startupError.textContent = 'کتاب لوڈ نہیں ہو سکی۔ براہِ کرم انٹرنیٹ اور fazail.pdf فائل کا راستہ چیک کریں۔ / The PDF could not be loaded. Please check your connection and the PDF file.'; }
       loaderText.innerHTML = `کتاب کھولی نہیں جا سکی<br><small style="color:#a2b0a6;font-size:12px;line-height:2;display:block;margin-top:16px;">PDF کا راستہ چیک کریں۔ موجودہ path: ${escapeHtml(PDF_URL)}</small>`;
     }
   }
@@ -1104,10 +1047,14 @@
     }
   }
 
-  pageInput.addEventListener('focus', () => { setTimeout(updateClearBtn, 100); });
+  pageInput.addEventListener('focus', () => {
+    setTimeout(updateClearBtn, 100);
+  });
   pageInput.addEventListener('input', updateClearBtn);
   pageInput.addEventListener('blur', () => {
-    setTimeout(() => { if (pageClearBtn) pageClearBtn.classList.remove('show'); }, 150);
+    setTimeout(() => {
+      if (pageClearBtn) pageClearBtn.classList.remove('show');
+    }, 150);
   });
 
   function clearPageInput() {
@@ -1303,7 +1250,6 @@
   }
 
   async function saveAllFavoritesJPG() {
-    if (!pdfDoc || isS aveAllFavoritesJPG) return;
     if (!pdfDoc || isSaving) return;
     if (favorites.length === 0) { showToast('ابھی کوئی پسندیدہ صفحہ نہیں'); return; }
     closeExportSheet();
