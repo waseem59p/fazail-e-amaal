@@ -1,0 +1,61 @@
+{
+  "name": "فضائلِ اعمال — مکمل کتاب",
+  "short_name": "فضائلِ اعمال",
+  "description": "فضائلِ اعمال مکمل کتاب آن لائن پڑھیں اور آف لائن ایپ ڈاؤن لوڈ کریں۔",
+  "lang": "ur",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#101916",
+  "theme_color": "#123a32",
+  "categories": ["books", "education", "lifestyle"],
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "آف لائن ایپ ڈاؤن لوڈ",
+      "short_name": "APK",
+      "description": "آف لائن ایپ ڈاؤن لوڈ کریں",
+      "url": "./?action=download",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
