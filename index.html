@@ -13,7 +13,6 @@
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="manifest" href="manifest.json">
 
-<!-- ✅ WhatsApp / Facebook / Twitter — Link Preview (PNG) -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://fazaileamal.web.app/">
 <meta property="og:title" content="فضائلِ اعمال — آن لائن پڑھیں">
@@ -54,9 +53,6 @@
   body { display: flex; flex-direction: column;
     height: 100vh; height: 100dvh; overflow: hidden; }
 
-  /* ============================================================
-     BUTTONS — big & professional
-  ============================================================ */
   .btn {
     display: inline-flex; align-items: center; justify-content: center;
     gap: 6px;
@@ -78,9 +74,6 @@
     stroke-linecap: round; stroke-linejoin: round; display: block; }
   .btn:active { transform: scale(.94); }
 
-  /* ============================================================
-     TOPBAR
-  ============================================================ */
   .topbar {
     flex: 0 0 auto;
     background: linear-gradient(180deg, var(--navy-light), var(--navy));
@@ -93,7 +86,6 @@
   }
   .topbar-row { display: flex; align-items: center; width: 100%; }
 
-  /* Row 1 — brand | zoom | save+apk */
   .topbar-row-1 {
     display: grid;
     grid-template-columns: auto 1fr auto;
@@ -114,7 +106,6 @@
     overflow: hidden; text-overflow: ellipsis;
   }
 
-  /* Zoom badge — center */
   .zoom-badge {
     justify-self: center;
     font-size: 12.5px;
@@ -130,7 +121,6 @@
     box-shadow: 0 2px 8px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.12);
   }
 
-  /* Action pair — save + apk */
   .topbar-row-1 .action-pair {
     display: flex; align-items: center; gap: 6px;
     justify-self: end; flex-shrink: 0;
@@ -154,7 +144,6 @@
   }
   .btn.apk-btn:disabled { opacity: .6; cursor: not-allowed; }
 
-  /* Row 2 — controls */
   .topbar-row-2 {
     justify-content: space-between;
     gap: 6px;
@@ -166,9 +155,6 @@
     height: 44px;
   }
 
-  /* ============================================================
-     VIEWER
-  ============================================================ */
   .viewer {
     flex: 1 1 auto; position: relative; overflow: hidden;
     background: radial-gradient(circle at 30% 20%, rgba(201,162,39,.05), transparent 50%),
@@ -213,9 +199,6 @@
   .edge-hint.right { right: 10px; }
   .edge-hint.show { opacity: .95; }
 
-  /* ============================================================
-     LOADER
-  ============================================================ */
   .loader {
     position: fixed; inset: 0;
     display: none; flex-direction: column;
@@ -234,9 +217,6 @@
   }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* ============================================================
-     BOTTOMBAR
-  ============================================================ */
   .bottombar {
     flex: 0 0 auto;
     background: linear-gradient(0deg, var(--navy-light), var(--navy));
@@ -286,9 +266,6 @@
     min-width: 26px; text-align: center;
   }
 
-  /* ============================================================
-     DRAWER
-  ============================================================ */
   .drawer-overlay, .sheet-overlay {
     position: fixed; inset: 0;
     background: rgba(0,0,0,.75);
@@ -374,9 +351,6 @@
     fill: none; stroke: currentColor; stroke-width: 2.5;
   }
 
-  /* ============================================================
-     SHEET
-  ============================================================ */
   .sheet {
     position: fixed; left: 50%; bottom: -100%;
     transform: translateX(-50%);
@@ -433,9 +407,70 @@
     color: #ff8a8a; justify-content: center;
   }
 
-  /* ============================================================
-     TOAST / HINTS
-  ============================================================ */
+  /* Layout preview (mini bottombar in settings) */
+  .layout-option {
+    display: flex; flex-direction: column; gap: 8px;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid var(--gold);
+    background: rgba(201,162,39,.08);
+    cursor: pointer;
+    transition: background .15s, transform .15s;
+  }
+  .layout-option:active { transform: scale(.98); }
+  .layout-option.active {
+    border-color: var(--gold-light);
+    background: rgba(201,162,39,.18);
+    box-shadow: 0 0 0 2px rgba(201,162,39,.35);
+  }
+  .layout-option .layout-name {
+    font-size: 12px; font-weight: 700;
+    color: var(--gold-light);
+    text-align: center;
+  }
+  .layout-preview {
+    display: flex; align-items: center; justify-content: center;
+    gap: 5px;
+    padding: 8px 6px;
+    border-radius: 10px;
+    background: rgba(0,0,0,.35);
+    border: 1px solid rgba(201,162,39,.25);
+  }
+  .layout-preview .mini-btn {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    border: 1px solid var(--gold);
+    background: linear-gradient(180deg, rgba(255,255,255,.1), rgba(255,255,255,.03));
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .layout-preview .mini-btn svg {
+    width: 15px; height: 15px;
+    fill: none; stroke: currentColor; stroke-width: 2.4;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+  .layout-preview .mini-input {
+    flex: 1; min-width: 42px; max-width: 72px;
+    height: 32px;
+    border-radius: 8px;
+    border: 1px solid rgba(201,162,39,.5);
+    background: rgba(0,0,0,.45);
+    display: flex; align-items: center; justify-content: center;
+    gap: 3px;
+    font-family: monospace; font-size: 10px; font-weight: 800;
+    color: var(--gold-light);
+  }
+  .layout-preview .mini-input .num {
+    background: #fff; color: var(--navy);
+    padding: 1px 4px; border-radius: 4px;
+    font-size: 9px; line-height: 1.4;
+  }
+  .layout-preview .mini-input .sep,
+  .layout-preview .mini-input .tot {
+    font-size: 9px; opacity: .75;
+  }
+
   .toast {
     position: fixed; bottom: 100px; left: 50%;
     transform: translateX(-50%) translateY(20px);
@@ -484,9 +519,6 @@
   .zoom-hint.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
   .zoom-hint small { font-size: 11.5px; color: #8fa2bd; }
 
-  /* ============================================================
-     STARTUP SCREEN
-  ============================================================ */
   .startup-screen {
     position: fixed; inset: 0; z-index: 9999;
     display: flex; align-items: center; justify-content: center;
@@ -598,9 +630,6 @@
     font-family: "Noto Nastaliq Urdu", Arial, sans-serif;
   }
 
-  /* ============================================================
-     Small phones < 360px
-  ============================================================ */
   @media (max-width: 359px) {
     .topbar-row-1 .brand span { font-size: 13px; }
     .topbar-row-1 .brand img { width: 32px; height: 32px; }
@@ -613,6 +642,8 @@
     .bottombar .btn { width: 42px; height: 42px; }
     .page-input { height: 42px; padding: 0 6px; gap: 5px; }
     .page-input input { height: 32px; font-size: 15px; width: 52px; }
+    .layout-preview .mini-btn { width: 28px; height: 28px; }
+    .layout-preview .mini-input { height: 28px; min-width: 36px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -621,9 +652,7 @@
       transition-duration: .01ms !important;
     }
   }
-    /* ============================================================
-     CONTACT CARD — New App Order
-  ============================================================ */
+
   .contact-card {
     margin-top: 22px;
     padding: 16px 14px 14px;
@@ -735,7 +764,6 @@
       </button>
       <div class="startup-note">FREE · OFFLINE · ZOOM & BOOKMARKS</div>
 
-      <!-- ✅ Contact Card — New App Order -->
       <div class="contact-card">
         <div class="contact-label">📱 نیا موبائل ایپ بنوانے کے لیے رابطہ کریں</div>
         <a href="tel:+923071521701" class="contact-number" aria-label="Call 0307 1521701">
@@ -801,11 +829,14 @@
     </button>
     <button class="btn" onclick="toggleFavorite()" id="favBtn" aria-label="پسندیدہ">
       <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-      <span id="favBtnText">پسندیدہ</span>
+      <span id="favBtnText"></span>
     </button>
-    <button class="btn" onclick="openDrawer()" aria-label="پسندیدہ فہرست">
+    <button class="btn" onclick="openDrawer()" aria-label="فہرست">
       <svg viewBox="0 0 24 24"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>
       <span id="favCount" style="background:var(--star);color:#000;border-radius:10px;padding:0 7px;font-size:11px;font-weight:800;min-width:20px;text-align:center;">0</span>
+    </button>
+    <button class="btn" onclick="openLayoutSheet()" title="بٹن ترتیب" aria-label="بٹن ترتیب">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
     </button>
   </div>
 </div>
@@ -834,29 +865,11 @@
 <!-- Zoom hint -->
 <div class="zoom-hint" id="zoomHint">
   دو انگلیوں سے زوم کریں<br>
-  <small>کنارے پر سوائپ = اگلا صفحہ</small>
+  <small>بائیں سے دائیں سوائپ = اگلا صفحہ</small>
 </div>
 
-<!-- BOTTOMBAR -->
-<div class="bottombar">
-  <button class="btn" onclick="firstPage()" title="پہلا" aria-label="پہلا صفحہ">
-    <svg viewBox="0 0 24 24"><line x1="6" y1="4" x2="6" y2="20"/><polyline points="19 5 9 12 19 19"/></svg>
-  </button>
-  <button class="btn" onclick="prevPage()" title="پچھلا" aria-label="پچھلا صفحہ">
-    <svg viewBox="0 0 24 24"><polyline points="15 5 8 12 15 19"/></svg>
-  </button>
-  <div class="page-input">
-    <input type="text" id="pageInput" inputmode="numeric" maxlength="5" value="00" placeholder="—" autocomplete="off" aria-label="صفحہ نمبر">
-    <span class="separator">/</span>
-    <span class="total" id="totalPages">—</span>
-  </div>
-  <button class="btn" onclick="nextPage()" title="اگلا" aria-label="اگلا صفحہ">
-    <svg viewBox="0 0 24 24"><polyline points="9 5 16 12 9 19"/></svg>
-  </button>
-  <button class="btn" onclick="lastPage()" title="آخری" aria-label="آخری صفحہ">
-    <svg viewBox="0 0 24 24"><line x1="18" y1="4" x2="18" y2="20"/><polyline points="5 5 15 12 5 19"/></svg>
-  </button>
-</div>
+<!-- BOTTOMBAR (JS se render hoga) -->
+<div class="bottombar" id="bottombar"></div>
 
 <!-- DRAWER -->
 <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
@@ -864,7 +877,7 @@
   <div class="drawer-header">
     <h2>
       <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-      پسندیدہ صفحات
+      صفحات
     </h2>
     <button class="btn" onclick="closeDrawer()" aria-label="بند">
       <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -887,9 +900,57 @@
     </button>
     <button onclick="saveAllFavoritesJPG()">
       <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-      <span>تمام پسندیدہ صفحات محفوظ کریں</span>
+      <span>تمام صفحات محفوظ کریں</span>
     </button>
     <button class="close-btn" onclick="closeExportSheet()">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <span>بند کریں</span>
+    </button>
+  </div>
+</div>
+
+<!-- LAYOUT SHEET (Button arrangement) -->
+<div class="sheet-overlay" id="layoutOverlay" onclick="closeLayoutSheet()"></div>
+<div class="sheet" id="layoutSheet">
+  <h3>
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    بٹن ترتیب منتخب کریں
+  </h3>
+  <div class="sheet-buttons">
+    <div class="layout-option" data-layout="default" onclick="applyLayoutPreset('default')">
+      <div class="layout-name">ڈیفالٹ</div>
+      <div class="layout-preview">
+        <span class="mini-btn"><svg viewBox="0 0 24 24"><line x1="6" y1="4" x2="6" y2="20"/><polyline points="19 5 9 12 19 19"/></svg></span>
+        <span class="mini-btn"><svg viewBox="0 0 24 24"><line x1="18" y1="4" x2="18" y2="20"/><polyline points="5 5 15 12 5 19"/></svg></span>
+        <span class="mini-input"><span class="num">0</span><span class="sep">/</span><span class="tot">—</span></span>
+        <span class="mini-btn"><svg viewBox="0 0 24 24"><polyline points="15 5 8 12 15 19"/></svg></span>
+        <span class="mini-btn"><svg viewBox="0 0 24 24"><polyline points="9 5 16 12 9 19"/></svg></span>
+      </div>
+    </div>
+
+    <div class="layout-option" data-layout="standard" onclick="applyLayoutPreset('standard')">
+      <div class="layout-name">اسٹینڈرڈ</div>
+      <div class="layout-preview">
+        <span class="mini-btn"><svg viewBox="0 0 24 24"><line x1="18" y1="4" x2="18" y2="20"/><polyline points="5 5 15 12 5 19"/></svg></span>
+        <span class="mini-btn"><svg viewBox="0 0 24 24"><polyline points="9 5 16 12 9 19"/></svg></span>
+        <span class="mini-input"><span class="num">0</span><span class="sep">/</span><span class="tot">—</span></span>
+        <span class="mini-btn"><svg viewBox="0 0 24 24"><polyline points="15 5 8 12 15 19"/></svg></span>
+        <span class="mini-btn"><svg viewBox="0 0 24 24"><line x1="6" y1="4" x2="6" y2="20"/><polyline points="19 5 9 12 19 19"/></svg></span>
+      </div>
+    </div>
+
+    <div class="layout-option" data-layout="arrowsLeft" onclick="applyLayoutPreset('arrowsLeft')">
+      <div class="layout-name">ایرو بائیں</div>
+      <div class="layout-preview">
+        <span class="mini-btn"><svg viewBox="0 0 24 24"><line x1="6" y1="4" x2="6" y2="20"/><polyline points="19 5 9 12 19 19"/></svg></span>
+        <span class="mini-btn"><svg viewBox="0 0 24 24"><polyline points="15 5 8 12 15 19"/></svg></span>
+        <span class="mini-input"><span class="num">0</span><span class="sep">/</span><span class="tot">—</span></span>
+        <span class="mini-btn"><svg viewBox="0 0 24 24"><polyline points="9 5 16 12 9 19"/></svg></span>
+        <span class="mini-btn"><svg viewBox="0 0 24 24"><line x1="18" y1="4" x2="18" y2="20"/><polyline points="5 5 15 12 5 19"/></svg></span>
+      </div>
+    </div>
+
+    <button class="close-btn" onclick="closeLayoutSheet()">
       <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       <span>بند کریں</span>
     </button>
@@ -910,6 +971,7 @@ const STORAGE_KEY = 'fazail-e-amaal-favorites-v12';
 const LAST_PAGE_KEY = 'fazail-e-amaal-last-page-v12';
 const ZOOM_KEY = 'fazail-e-amaal-zoom-v12';
 const PAGE_OFFSET = 2;
+const LAYOUT_KEY = 'fazail-e-amaal-bottombar-layout-v1';
 
 if (window.pdfjsLib) {
   pdfjsLib.GlobalWorkerOptions.workerSrc =
@@ -939,6 +1001,133 @@ const backStack = [];
 let backHintTimer = null;
 
 /* ============================================================
+   BOTTOMBAR LAYOUT
+============================================================ */
+const BTN_DEFS = {
+  last:  { title: 'آخری',  action: 'lastPage()',  svg: '<line x1="6" y1="4" x2="6" y2="20"/><polyline points="19 5 9 12 19 19"/>' },
+  first: { title: 'پہلا',  action: 'firstPage()', svg: '<line x1="18" y1="4" x2="18" y2="20"/><polyline points="5 5 15 12 5 19"/>' },
+  next:  { title: 'اگلا',  action: 'nextPage()',  svg: '<polyline points="15 5 8 12 15 19"/>' },
+  prev:  { title: 'پچھلا', action: 'prevPage()',  svg: '<polyline points="9 5 16 12 9 19"/>' }
+};
+const LAYOUT_PRESETS = {
+  'default':    ['last', 'first', 'INPUT', 'next', 'prev'],
+  'standard':   ['first', 'prev', 'INPUT', 'next', 'last'],
+  'arrowsLeft': ['last', 'next', 'INPUT', 'prev', 'first']
+};
+let currentLayout = LAYOUT_PRESETS['default'].slice();
+let currentPresetName = 'default';
+
+function loadLayout() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(LAYOUT_KEY) || 'null');
+    if (Array.isArray(saved) && saved.length === 5 && saved.includes('INPUT') && saved.every(k => k === 'INPUT' || BTN_DEFS[k])) {
+      currentLayout = saved;
+      // Detect preset name
+      currentPresetName = 'custom';
+      for (const [name, arr] of Object.entries(LAYOUT_PRESETS)) {
+        if (arr.join(',') === saved.join(',')) { currentPresetName = name; break; }
+      }
+    }
+  } catch(e) {}
+  updateLayoutActiveState();
+}
+function saveLayout() {
+  try { localStorage.setItem(LAYOUT_KEY, JSON.stringify(currentLayout)); } catch(e) {}
+}
+function updateLayoutActiveState() {
+  document.querySelectorAll('.layout-option').forEach(el => {
+    if (el.dataset.layout === currentPresetName) el.classList.add('active');
+    else el.classList.remove('active');
+  });
+}
+
+function renderBottombar() {
+  const bb = document.getElementById('bottombar');
+  if (!bb) return;
+  bb.innerHTML = currentLayout.map(key => {
+    if (key === 'INPUT') {
+      return `
+        <div class="page-input">
+          <input type="text" id="pageInput" inputmode="numeric" maxlength="5" value="00" placeholder="—" autocomplete="off" aria-label="صفحہ نمبر">
+          <span class="separator">/</span>
+          <span class="total" id="totalPages">—</span>
+        </div>`;
+    }
+    const d = BTN_DEFS[key];
+    if (!d) return '';
+    return `<button class="btn" onclick="${d.action}" title="${d.title}" aria-label="${d.title}">
+      <svg viewBox="0 0 24 24">${d.svg}</svg>
+    </button>`;
+  }).join('');
+
+  const pi = document.getElementById('pageInput');
+  const tp = document.getElementById('totalPages');
+  if (tp) tp.textContent = totalPages || '—';
+  if (pi) {
+    if (currentPage) pi.value = getDisplayPage(currentPage);
+    pi.addEventListener('focus', () => setTimeout(() => pi.select(), 50));
+    pi.addEventListener('input', () => {
+      const ud = {'۰':'0','۱':'1','۲':'2','۳':'3','۴':'4','۵':'5','۶':'6','۷':'7','۸':'8','۹':'9'};
+      pi.value = pi.value.replace(/[۰-۹]/g, d => ud[d]).replace(/[^0-9]/g, '');
+    });
+    pi.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const dv = parseInt(pi.value);
+        if (!isNaN(dv)) goToPage(Math.max(1, Math.min(totalPages, dv + PAGE_OFFSET)));
+        pi.blur();
+      }
+    });
+    pi.addEventListener('blur', () => {
+      const dv = parseInt(pi.value);
+      if (!isNaN(dv)) {
+        const t = Math.max(1, Math.min(totalPages, dv + PAGE_OFFSET));
+        if (t !== currentPage) goToPage(t);
+        else pi.value = getDisplayPage(currentPage);
+      } else pi.value = getDisplayPage(currentPage);
+    });
+  }
+}
+
+function applyLayoutPreset(name) {
+  if (!LAYOUT_PRESETS[name]) return;
+  currentLayout = LAYOUT_PRESETS[name].slice();
+  currentPresetName = name;
+  saveLayout();
+  renderBottombar();
+  updateTotalPagesDisplay();
+  updateLayoutActiveState();
+  showToast('✅ ترتیب تبدیل ہو گئی');
+  closeLayoutSheet();
+}
+
+function updateTotalPagesDisplay() {
+  const tp = document.getElementById('totalPages');
+  if (tp) tp.textContent = totalPages || '—';
+}
+
+function openLayoutSheet() {
+  const sheet = document.getElementById('layoutSheet');
+  const overlay = document.getElementById('layoutOverlay');
+  if (sheet.classList.contains('show')) return;
+  updateLayoutActiveState();
+  sheet.classList.add('show');
+  overlay.classList.add('show');
+  pushBackHandler(() => {
+    sheet.classList.remove('show');
+    overlay.classList.remove('show');
+  });
+}
+function closeLayoutSheet() {
+  const sheet = document.getElementById('layoutSheet');
+  if (!sheet.classList.contains('show')) return;
+  closeWithBack(() => {
+    sheet.classList.remove('show');
+    document.getElementById('layoutOverlay').classList.remove('show');
+  });
+}
+
+/* ============================================================
    DOM
 ============================================================ */
 const canvas = document.getElementById('pdfCanvas');
@@ -946,8 +1135,6 @@ const viewerInner = document.getElementById('viewerInner');
 const wrap = document.getElementById('pdfCanvasWrap');
 const loader = document.getElementById('loader');
 const loaderText = document.getElementById('loaderText');
-const pageInput = document.getElementById('pageInput');
-const totalPagesEl = document.getElementById('totalPages');
 const favList = document.getElementById('favList');
 const favCount = document.getElementById('favCount');
 const favBtnText = document.getElementById('favBtnText');
@@ -1074,7 +1261,7 @@ function toggleFavorite() {
   if (idx >= 0) {
     favorites.splice(idx, 1);
     saveFavorites();
-    showToast('⭐ پسندیدہ سے ہٹا دیا');
+    showToast('⭐ سے ہٹا دیا');
   } else {
     favorites.push({ page });
     favorites.sort((a, b) => a.page - b.page);
@@ -1088,10 +1275,10 @@ function removeFavorite(page) {
 }
 function updateFavUI() {
   if (favCount) favCount.textContent = favorites.length;
-  if (favBtnText) favBtnText.textContent = isFavorite(currentPage) ? '✓' : 'پسندیدہ';
+  if (favBtnText) favBtnText.textContent = isFavorite(currentPage) ? '✓' : '';
   if (!favList) return;
   if (favorites.length === 0) {
-    favList.innerHTML = `<div class="fav-empty"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><div>ابھی کوئی پسندیدہ نہیں</div></div>`;
+    favList.innerHTML = `<div class="fav-empty"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><div>ابھی کوئی نہیں</div></div>`;
     return;
   }
   favList.innerHTML = favorites.map(f => `
@@ -1203,7 +1390,7 @@ async function loadPDF() {
     });
     pdfDoc = await task.promise;
     totalPages = pdfDoc.numPages;
-    if (totalPagesEl) totalPagesEl.textContent = totalPages;
+    updateTotalPagesDisplay();
 
     const sz = parseFloat(localStorage.getItem(ZOOM_KEY) || '1.2');
     if (!isNaN(sz) && sz >= 0.5 && sz <= 5) scale = sz;
@@ -1271,7 +1458,8 @@ async function renderPage(num) {
 
     currentPage = num;
     const dn = getDisplayPage(num);
-    if (pageInput) pageInput.value = dn;
+    const pi = document.getElementById('pageInput');
+    if (pi) pi.value = dn;
     updateFavUI();
     applyPanZoom();
     localStorage.setItem(LAST_PAGE_KEY, num);
@@ -1307,31 +1495,6 @@ function nextPage() { if (currentPage < totalPages) goToPage(currentPage + 1); e
 function prevPage() { if (currentPage > 1) goToPage(currentPage - 1); else showToast('📖 پہلا صفحہ'); }
 function firstPage() { goToPage(1); }
 function lastPage() { goToPage(totalPages); }
-
-/* Page input */
-pageInput.addEventListener('focus', () => setTimeout(() => pageInput.select(), 50));
-pageInput.addEventListener('input', () => {
-  let v = pageInput.value;
-  const ud = {'۰':'0','۱':'1','۲':'2','۳':'3','۴':'4','۵':'5','۶':'6','۷':'7','۸':'8','۹':'9'};
-  v = v.replace(/[۰-۹]/g, d => ud[d]).replace(/[^0-9]/g, '');
-  pageInput.value = v;
-});
-pageInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') {
-    e.preventDefault();
-    const dv = parseInt(pageInput.value);
-    if (!isNaN(dv)) goToPage(Math.max(1, Math.min(totalPages, dv + PAGE_OFFSET)));
-    pageInput.blur();
-  }
-});
-pageInput.addEventListener('blur', () => {
-  const dv = parseInt(pageInput.value);
-  if (!isNaN(dv)) {
-    const t = Math.max(1, Math.min(totalPages, dv + PAGE_OFFSET));
-    if (t !== currentPage) goToPage(t);
-    else pageInput.value = getDisplayPage(currentPage);
-  } else pageInput.value = getDisplayPage(currentPage);
-});
 
 /* Zoom / Pan */
 function applyPanZoom() {
@@ -1419,7 +1582,7 @@ viewerInner.addEventListener('touchend', (e) => {
     const dy = e.changedTouches[0].clientY - touchStartY;
     const dt = Date.now() - touchStartTime;
     if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.5 && dt < 500) {
-      if (dx > 0) prevPage(); else nextPage();
+      if (dx > 0) nextPage(); else prevPage();
     }
     isPanning = false; isSwiping = false; pinchStartDist = 0;
     wrap.style.transition = 'transform .12s ease-out';
@@ -1470,8 +1633,8 @@ document.addEventListener('keydown', (e) => {
   if (e.target.tagName === 'INPUT') return;
   if (isSaving || isDownloadingApk) return;
   switch (e.key) {
-    case 'ArrowRight': case 'ArrowDown': prevPage(); break;
-    case 'ArrowLeft': case 'ArrowUp': nextPage(); break;
+    case 'ArrowRight': case 'ArrowDown': nextPage(); break;
+    case 'ArrowLeft': case 'ArrowUp': prevPage(); break;
     case 'Home': firstPage(); break;
     case 'End': lastPage(); break;
     case '+': case '=': zoomIn(); break;
@@ -1481,6 +1644,7 @@ document.addEventListener('keydown', (e) => {
     case 'Escape':
       if (document.getElementById('drawer').classList.contains('show')) closeDrawer();
       else if (document.getElementById('sheet').classList.contains('show')) closeExportSheet();
+      else if (document.getElementById('layoutSheet').classList.contains('show')) closeLayoutSheet();
       break;
   }
 });
@@ -1514,7 +1678,7 @@ async function saveCurrentPageJPG() {
 
 async function saveAllFavoritesJPG() {
   if (!pdfDoc || isSaving) return;
-  if (favorites.length === 0) { showToast('ابھی کوئی پسندیدہ نہیں'); return; }
+  if (favorites.length === 0) { showToast('ابھی کوئی نہیں'); return; }
   closeExportSheet();
   const pagesToSave = favorites.slice();
   isSaving = true;
@@ -1625,6 +1789,8 @@ window.addEventListener('popstate', () => {
   document.body.classList.add('js-ready');
   try { history.pushState({ page: 'main' }, ''); } catch(e) {}
 
+  loadLayout();
+  renderBottombar();
   loadFavorites();
 
   if (startupLoading) startupLoading.hidden = false;
