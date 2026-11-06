@@ -661,6 +661,32 @@
     font: 9.5px Arial,sans-serif;
     letter-spacing: 1.5px; margin-top: 14px;
   }
+  
+    .startup-skip-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    margin-top: 14px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: rgba(0,0,0,.2);
+    border: 1px solid rgba(220,190,132,.3);
+    color: #f0e7d5;
+    font-family: "Noto Nastaliq Urdu", Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+  }
+  .startup-skip-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #c9a96e;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  
   .startup-error {
     color: #ffd0d0; font-size: 12.5px; line-height: 1.8;
     margin-top: 16px;
@@ -811,6 +837,12 @@
       <button class="startup-open-btn" onclick="enterBookReader()">
         کتاب کھولیں
       </button>
+      
+            <label class="startup-skip-label">
+        <input type="checkbox" id="skipStartupCheck">
+        <span>آئندہ یہ اسکرین نہ دکھائیں</span>
+      </label>
+      
       <div class="startup-note">FREE · OFFLINE · ZOOM & BOOKMARKS</div>
 
       <div class="contact-card">
@@ -920,6 +952,15 @@
 <!-- BOTTOMBAR (JS se render hoga) -->
 <div class="bottombar" id="bottombar"></div>
 
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- BACK HINT -->
+<div class="back-hint" id="backHint">
+  <svg viewBox="0 0 24 24"><polyline points="15 5 8 12 15 19"/></svg>
+  <span>بند کرنے کے لیے back دبائیں</span>
+</div>
+
 <!-- DRAWER -->
 <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
 <div class="drawer" id="drawer">
@@ -1021,6 +1062,8 @@ const LAST_PAGE_KEY = 'fazail-e-amaal-last-page-v12';
 const ZOOM_KEY = 'fazail-e-amaal-zoom-v12';
 const PAGE_OFFSET = 2;
 const LAYOUT_KEY = 'fazail-e-amaal-bottombar-layout-v1';
+
+const STARTUP_SEEN_KEY = 'fazail-e-amaal-startup-seen-v1';
 
 if (window.pdfjsLib) {
   pdfjsLib.GlobalWorkerOptions.workerSrc =
@@ -1223,6 +1266,16 @@ function escapeHtml(s) {
 function enterBookReader() {
   if (startupScreen) startupScreen.classList.add('is-hidden');
   document.body.classList.add('js-ready');
+
+  try {
+    const chk = document.getElementById('skipStartupCheck');
+    if (chk && chk.checked) {
+      localStorage.setItem(STARTUP_SEEN_KEY, '1');
+    } else {
+      localStorage.removeItem(STARTUP_SEEN_KEY);
+    }
+  } catch(e) {}
+
   if (!pdfDoc) loadPDF();
   else renderPage(currentPage);
 }
@@ -1842,8 +1895,15 @@ window.addEventListener('popstate', () => {
   renderBottombar();
   loadFavorites();
 
-  if (startupLoading) startupLoading.hidden = false;
-  if (startupWelcome) startupWelcome.hidden = true;
+  let startupSeen = false;
+  try { startupSeen = localStorage.getItem(STARTUP_SEEN_KEY) === '1'; } catch(e) {}
+
+  if (startupSeen) {
+    if (startupScreen) startupScreen.classList.add('is-hidden');
+  } else {
+    if (startupLoading) startupLoading.hidden = false;
+    if (startupWelcome) startupWelcome.hidden = true;
+  }
 
   loadPDF();
 
